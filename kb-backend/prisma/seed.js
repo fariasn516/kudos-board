@@ -3,8 +3,8 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 async function main() {
-    /* const boards = [
-        { name: 'Team Celebration', category: 'Celebration', author: "Mike" }
+    const boards = [
+        { title: 'Team Celebration', category: 'Celebration', author: "Mike" }
     ]
 
     const cards = [
@@ -19,7 +19,7 @@ async function main() {
         await prisma.card.create({ data: card });
     }
 
-    console.log("Seeded boards with cards!"); */
+    console.log("Seeded boards with cards!");
 }
 
 main()
