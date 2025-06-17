@@ -1,9 +1,8 @@
 const express = require('express')
 const cors    = require('cors')
+const Board = require('./board-model.js')
+const Card  = require('./card-model.js')
 const helmet  = require('helmet')
-
-const Board = require('./board-model')
-const Card  = require('./card-model')
 
 const server = express()
 server.use(helmet())

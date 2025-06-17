@@ -1,9 +1,7 @@
-const express = require('express')
+const server = require('./api/server')
 
-const app = express()
+const PORT = process.env.PORT || 3000
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`)
-  });
+server.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`)
+})

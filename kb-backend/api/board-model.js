@@ -18,8 +18,8 @@ module.exports = {
     },
 
     async create(changes) {
-        // POST http://localhost:5432/api/board/1 { name: "Fido", type: "dog": age: 5 }
-        // INSERT INTO "Board" (name, type, age) VALUES ('Fido', 'dog', 5);
+        // POST http://localhost:5432/api/board/1 { fields here }
+        // INSERT INTO "Board"
         const board = await prisma.board.create({ data: changes })
         return board
     },

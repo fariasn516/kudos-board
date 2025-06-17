@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 module.exports = {
     async find(where) {
-        // GET http://localhost:5432/api/card?type=dog
+        // GET http://localhost:5432/api/card?title=blah
         // SELECT * FROM "Card" WHERE type='dog';
         const cards = await prisma.card.findMany({ where })
         return cards
@@ -18,8 +18,8 @@ module.exports = {
     },
 
     async create(changes) {
-        // POST http://localhost:5432/api/card/1 { name: "Fido", type: "dog": age: 5 }
-        // INSERT INTO "Card" (name, type, age) VALUES ('Fido', 'dog', 5);
+        // POST http://localhost:5432/api/card/1 { fields here}
+        // INSERT INTO "Card"
         const card = await prisma.card.create({ data: changes })
         return card
     },
