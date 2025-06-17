@@ -1,9 +1,10 @@
 import React from 'react';
+import kudosLogo from '../assets/kudoboard_logo.webp';
 
 const Header = () => {
   return (
-    <header className="footer">
-          <p>&copy; © 2025 Kudos Board by Nancy F.</p>
+    <header className="header">
+          <img src={kudosLogo} alt="Kudo Logo" className="header-logo" />
     </header>
   );
 };
