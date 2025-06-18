@@ -1,7 +1,7 @@
 const AddBoard = () => {
     return (
-        <div className="add-board-button">
-            <button>Add a New Board</button>
+        <div className="add-board-button-container">
+            <button className="add-board-button">Add a New Board</button>
         </div>
     );
 };
