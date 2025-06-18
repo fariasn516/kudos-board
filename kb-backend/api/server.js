@@ -67,7 +67,7 @@ server.delete('/api/boards/:id', async (req, res, next) => {
   try {
     const board = await Board.findById(id)
     if (board) {
-      const deleted = await Board.remove(id)
+      const deleted = await Board.delete(id)
       res.json(deleted)
     } else {
       next({ status: 404, message: 'Board not found' })
@@ -107,7 +107,7 @@ server.delete('/api/cards/:id', async (req, res, next) => {
   try {
     const card = await Card.findById(id)
     if (card) {
-      const deleted = await Card.remove(id)
+      const deleted = await Card.delete(id)
       res.json(deleted)
     } else {
       next({ status: 404, message: 'Card not found' })

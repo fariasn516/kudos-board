@@ -36,5 +36,12 @@ module.exports = {
         // DELETE FROM "Card" WHERE id = 1;
         const card = await prisma.card.delete({ where: { id } })
         return card
+    },
+
+    async findByBoardId(boardId) {
+        // GET http://localhost:5432/api/card?boardId=1
+        // SELECT * FROM "Card" WHERE boardId = 1;
+        const cards = await prisma.card.findMany({ where: { boardId } })
+        return cards
     }
 }
