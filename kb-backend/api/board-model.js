@@ -6,7 +6,7 @@ module.exports = {
     async find(where) {
         // GET http://localhost:5432/api/board?category=celebration
         // SELECT * FROM "Board" WHERE category='celebration';
-        const boards = await prisma.board.findMany({ where })
+        const boards = await prisma.board.findMany({ where, include: { cards: true } })
         return boards
     },
 
