@@ -12,7 +12,7 @@ const BoardPage = () => {
     const [cards, setCards] = useState([]);
 
       useEffect(() => {
-        fetch('http://localhost:3000/api/boards/{boardId}/cards')
+        fetch(`http://localhost:3000/api/boards/${boardData.id}/cards`)
           .then(response => {
             if (!response.ok) {
               throw new Error(`HTTP error! status: ${response.status}`);
@@ -41,7 +41,7 @@ const BoardPage = () => {
                     <p>Category: {boardData.category}</p>
                 </div>
                 <AddCard />
-                <CardList />
+                <CardList cards={cards} />
             </main>
             <Footer />
         </div>
