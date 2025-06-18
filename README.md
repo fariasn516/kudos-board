@@ -1,5 +1,3 @@
-📝 `NOTE` Use this template to initialize the contents of a README.md file for your application. As you work on your assignment over the course of the week, update the required or stretch features lists to indicate which features you have completed by changing `[ ]` to `[x]`. (🚫 Remove this paragraph before submitting your assignment.)
-
 ## Unit Assignment: Kudos Board
 
 Submitted by: **Nancy Farias**
@@ -12,18 +10,18 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 ##### Home Page
 
-- [ ] **Home Page Display**
-  - [ ] Home page includes the following features:
-    - [ ] Header
-    - [ ] Banner
+- [x] **Home Page Display**
+  - [x] Home page includes the following features:
+    - [x] Header
+    - [x] Banner
     - [ ] Search bar
-    - [ ] List of boards
-    - [ ] Footer
-- [ ] **Display Boards**
-  - [ ] Users can view a list of all boards in a grid view on the home page.
-  - [ ] For each board displayed, users can see:
-    - [ ] An image/gif
-    - [ ] A board title
+    - [x] List of boards
+    - [x] Footer
+- [x] **Display Boards**
+  - [x] Users can view a list of all boards in a grid view on the home page.
+  - [x] For each board displayed, users can see:
+    - [x] An image/gif
+    - [x] A board title
 - [ ] **Filter Boards**
   - [ ] Home page includes navigation bar, drop down, or some other mechanism which allows users to filter boards by the following categories:
     - [ ] All/Home (displays all boards)
@@ -43,8 +41,8 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
     - [ ] Clicks the Submit/Search button
   - [ ] User can delete all text from the text input field.
   - [ ] When all text is cleared from the text input field, all boards are displayed in a grid view
-- [ ] **View Board**
-  - [ ] Users can click on a board in the grid view to navigate to a new page containing that board's details.
+- [x] **View Board**
+  - [x] Users can click on a board in the grid view to navigate to a new page containing that board's details.
 - [ ] **Add New Board**
   - [ ] Users can create a new board on the home page.
   - [ ] When creating a new board, users can specify the:
@@ -59,13 +57,13 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 ##### Board Page
 
-- [ ] **Display Cards**
-  - [ ] For a given board, the board's page displays a list of all cards for that board in a grid view.
-  - [ ] For each card should displayed, users can see the card's:
-    - [ ] Message
-    - [ ] Gif
-    - [ ] Number of upvotes
-    - [ ] Delete button
+- [x] **Display Cards**
+  - [x] For a given board, the board's page displays a list of all cards for that board in a grid view.
+  - [x] For each card should displayed, users can see the card's:
+    - [x] Message
+    - [x] Gif
+    - [] Number of upvotes
+    - [x] Delete button
 - [ ] **Add New Card**
   - [ ] Users can make a new card associated with the current board.
   - [ ] To successfully create a new card, users must specify the following:
