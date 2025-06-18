@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import SortButtons from '../components/SortButtons';
 import BoardList from '../components/BoardList';
+import AddBoard from '../components/AddBoard';
 import Footer from '../components/Footer';
 
 const HomePage = () => {
@@ -12,6 +13,7 @@ const HomePage = () => {
       <Header />
       <SearchBar />
       <SortButtons />
+      <AddBoard />
       <BoardList />
       <Footer />
     </div>
