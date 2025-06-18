@@ -1,30 +1,27 @@
+import { useEffect } from "react";
 import BoardCard from "./BoardCard";
-import image from "../assets/react.svg"
 
-const BoardList = () => {
+const BoardList = ({ boards }) => {
 
-    return (
-        <div className="board-list-component">
-            <ul className="board-list">
-                <li className="board-list-item">
-                    <BoardCard
-                        id={1}
-                        title={"Hi"}
-                        image={image}
-                        category={"Celebration"}
-                    />
-                </li>
-                <li className="board-list-item">
-                    <BoardCard
-                        id={2}
-                        title={"Hi"}
-                        image={image}
-                        category={"Celebration"}
-                    />
-                </li>
-            </ul>
-        </div>
-    );
+    useEffect(() => {
+    });
+
+  return (
+    <div className="board-list-component">
+      <ul className="board-list">
+        {boards.map((board) => (
+          <li key={board.id} className="board-list-item">
+            <BoardCard
+              id={board.id}
+              title={board.title}
+              image={`https://picsum.photos/200/300?random=${board.id}`}
+              category={board.category}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default BoardList;
