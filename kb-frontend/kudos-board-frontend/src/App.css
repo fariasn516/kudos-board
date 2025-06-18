@@ -27,7 +27,8 @@
 
 .search-button,
 .clear-button,
-.add-board-button {
+.add-board-button,
+.add-card-button {
   padding: 5px 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -37,7 +38,8 @@
 
 .search-button:hover,
 .clear-button:hover,
-.add-board-button:hover  {
+.add-board-button:hover,
+.add-card-button:hover  {
   background: #e0e0e0;
 }
 

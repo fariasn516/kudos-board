@@ -1,9 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../home-page-components/Header';
+import Footer from '../home-page-components/Footer';
 import { Link } from 'react-router-dom';
-import CardList from '../components/CardList';
+import CardList from '../board-page-components/CardList';
+import AddCard from '../board-page-components/AddCard';
 
 const BoardPage = () => {
     const location = useLocation();
@@ -20,6 +21,7 @@ const BoardPage = () => {
                     <h1>Board: {boardData.title}</h1>
                     <p>Category: {boardData.category}</p>
                 </div>
+                <AddCard />
                 <CardList />
             </main>
             <Footer />
