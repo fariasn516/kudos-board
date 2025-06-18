@@ -11,7 +11,7 @@ const BoardList = () => {
                         id={1}
                         title={"Hi"}
                         image={image}
-                        type={"Celebration"}
+                        category={"Celebration"}
                     />
                 </li>
                 <li className="board-list-item">
@@ -19,7 +19,7 @@ const BoardList = () => {
                         id={2}
                         title={"Hi"}
                         image={image}
-                        type={"Celebration"}
+                        category={"Celebration"}
                     />
                 </li>
             </ul>
