@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from '../home-page-components/Header';
-import Footer from '../home-page-components/Footer';
+import Header from '../shared-components/Header';
+import Footer from '../shared-components/Footer';
 import { Link } from 'react-router-dom';
 import CardList from '../board-page-components/CardList';
 import AddCard from '../board-page-components/AddCard';

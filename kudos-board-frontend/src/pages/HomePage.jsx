@@ -1,39 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../home-page-components/Header';
+import Header from '../shared-components/Header';
 import SearchBar from '../home-page-components/SearchBar';
 import SortButtons from '../home-page-components/SortButtons';
 import BoardList from '../home-page-components/BoardList';
 import AddBoard from '../home-page-components/AddBoard';
-import Footer from '../home-page-components/Footer';
+import Footer from '../shared-components/Footer';
 
 const HomePage = () => {
   const [boards, setBoards] = useState([]);
+  const [searchTitle, setSearchTitle] = useState("");
+
+  const fetchBoards = (title = "") => {
+    let url = 'http://localhost:3000/api/boards';
+    if (title) {
+      url += `?title=${encodeURIComponent(title)}`;
+    }
+
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) throw new Error(`Status: ${res.status}`);
+        return res.json();
+      })
+      .then(setBoards)
+      .catch((err) => {
+        console.error("Error fetching boards:", err);
+        setBoards([]);
+      });
+  };
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/boards')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Boards:', data);
-        setBoards(data);
-      })
-      .catch(error => {
-        console.error('Error fetching boards:', error);
-      });
+    fetchBoards();
   }, []);
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    fetchBoards(searchTitle);
+  };
 
   return (
     <div className="home-page">
       <Header />
-      <SearchBar />
+      <SearchBar
+        searchTitle={searchTitle}
+        setSearchTitle={setSearchTitle}
+        onSearch={handleSearch}
+      />
       <SortButtons />
       <AddBoard />
-      <BoardList boards={boards}/>
+      <BoardList boards={boards} />
       <Footer />
     </div>
   );
