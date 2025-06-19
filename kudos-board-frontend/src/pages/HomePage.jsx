@@ -13,19 +13,32 @@ const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const fetchBoards = (title = "") => {
+  const fetchBoards = (title = "", category = "All") => {
     let url = 'http://localhost:3000/api/boards';
-    if (title) {
-      url += `?title=${encodeURIComponent(title)}`;
+    const params = [];
+
+    if (title) params.push(`title=${encodeURIComponent(title)}`);
+    if (category && category !== "All" && category !== "Recent") {
+      params.push(`category=${encodeURIComponent(category)}`);
+    }
+
+    if (params.length > 0) {
+      url += `?${params.join("&")}`;
     }
 
     fetch(url)
-      .then((res) => {
+      .then(res => {
         if (!res.ok) throw new Error(`Status: ${res.status}`);
         return res.json();
       })
-      .then(setBoards)
-      .catch((err) => {
+      .then(data => {
+        const sortedData = category === "Recent"
+          ? [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          : data;
+
+        setBoards(sortedData);
+      })
+      .catch(err => {
         console.error("Error fetching boards:", err);
         setBoards([]);
       });
@@ -37,7 +50,12 @@ const HomePage = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    fetchBoards(searchTitle);
+    fetchBoards(searchTitle, selectedCategory);
+  };
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    fetchBoards(searchTitle, category);
   };
 
   return (
@@ -48,7 +66,9 @@ const HomePage = () => {
         setSearchTitle={setSearchTitle}
         onSearch={handleSearch}
       />
-      <SortButtons />
+      <SortButtons
+        selectedCategory={selectedCategory}
+        onCategoryClick={handleCategoryClick} />
       <AddBoard onClick={() => setShowModal(true)} />
       {showModal && (
         <AddBoardModal

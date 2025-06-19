@@ -65,6 +65,12 @@
   background: #e0e0e0;
 }
 
+.sort-button.active {
+  background-color: #5d5d5d;
+  color: white;
+  font-weight: bold;
+}
+
 .board-list,
 .card-list {
   list-style: none;
