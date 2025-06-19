@@ -1,6 +1,6 @@
 import Card from "./Card";
 
-const CardList = ({ cards }) => {
+const CardList = ({ cards, onUpvote }) => {
     return (
         <div className="card-list-component">
             <ul className="card-list">
@@ -11,6 +11,8 @@ const CardList = ({ cards }) => {
                             title={card.title}
                             description={card.description}
                             gif={card.gif}
+                            upvotes={card.upvotes}
+                            onUpvote={() => onUpvote(card.id)}
                         />
                     </li>
                 ))}

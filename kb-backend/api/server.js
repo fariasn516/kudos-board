@@ -1,8 +1,8 @@
 const express = require('express')
-const cors    = require('cors')
+const cors = require('cors')
 const Board = require('./board-model.js')
-const Card  = require('./card-model.js')
-const helmet  = require('helmet')
+const Card = require('./card-model.js')
+const helmet = require('helmet')
 
 const server = express()
 server.use(helmet())
@@ -46,9 +46,9 @@ server.post('/api/boards', async (req, res, next) => {
 
 // [PUT] /api/boards/:id
 server.put('/api/boards/:id', async (req, res, next) => {
-  const id      = Number(req.params.id)
+  const id = Number(req.params.id)
   const changes = req.body
-  const hasMod  = changes.title || changes.category || changes.author
+  const hasMod = changes.title || changes.category || changes.author
 
   try {
     const board = await Board.findById(id)
@@ -90,7 +90,7 @@ server.get('/api/boards/:id/cards', async (req, res, next) => {
 // [POST] /api/boards/:id/cards
 server.post('/api/boards/:id/cards', async (req, res, next) => {
   const boardId = Number(req.params.id)
-  const card    = { ...req.body, boardId }
+  const card = { ...req.body, boardId }
 
   const valid = card.title && card.description && card.gif
   if (!valid) return next({ status: 422, message: 'title, description and gif are required' })
@@ -100,6 +100,18 @@ server.post('/api/boards/:id/cards', async (req, res, next) => {
     res.status(201).json(created)
   } catch (err) { next(err) }
 })
+
+// [PUT] /api/cards/:id
+server.put('/api/cards/:id', async (req, res, next) => {
+  const id = Number(req.params.id);
+  const { upvotes } = req.body;
+  try {
+    const updated = await Card.update(id, { upvotes });
+    res.json(updated);
+  } catch (err) {
+    next(err);
+  }
+});
 
 // [DELETE] /api/cards/:id
 server.delete('/api/cards/:id', async (req, res, next) => {
