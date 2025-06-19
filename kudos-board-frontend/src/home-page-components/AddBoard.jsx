@@ -1,9 +1,13 @@
-const AddBoard = () => {
+import React from 'react';
+
+const AddBoard = ({ onClick }) => {
     return (
-        <div className="add-board-button-container">
-            <button className="add-board-button">Add a New Board</button>
-        </div>
+      <section className="add-board">
+        <button onClick={onClick} className="add-board-button">
+          Add Board
+        </button>
+      </section>
     );
-};
+  };
 
 export default AddBoard;

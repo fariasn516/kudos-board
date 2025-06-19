@@ -5,10 +5,12 @@ import SortButtons from '../home-page-components/SortButtons';
 import BoardList from '../home-page-components/BoardList';
 import AddBoard from '../home-page-components/AddBoard';
 import Footer from '../shared-components/Footer';
+import AddBoardModal from '../home-page-components/AddBoardModal';
 
 const HomePage = () => {
   const [boards, setBoards] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const fetchBoards = (title = "", category = "All") => {
@@ -67,7 +69,13 @@ const HomePage = () => {
       <SortButtons
         selectedCategory={selectedCategory}
         onCategoryClick={handleCategoryClick} />
-      <AddBoard />
+      <AddBoard onClick={() => setShowModal(true)} />
+      {showModal && (
+        <AddBoardModal
+          onClose={() => setShowModal(false)}
+          onBoardCreated={() => fetchBoards(searchTitle, selectedCategory)}
+        />
+      )}
       <BoardList boards={boards} />
       <Footer />
     </div>
