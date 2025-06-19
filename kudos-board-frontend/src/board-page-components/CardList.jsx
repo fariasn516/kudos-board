@@ -1,6 +1,6 @@
 import Card from "./Card";
 
-const CardList = ({ cards, onUpvote }) => {
+const CardList = ({ cards, onUpvote, onDelete }) => {
     return (
         <div className="card-list-component">
             <ul className="card-list">
@@ -13,6 +13,7 @@ const CardList = ({ cards, onUpvote }) => {
                             gif={card.gif}
                             upvotes={card.upvotes}
                             onUpvote={() => onUpvote(card.id)}
+                            onDelete={() => onDelete(card.id)}
                         />
                     </li>
                 ))}
