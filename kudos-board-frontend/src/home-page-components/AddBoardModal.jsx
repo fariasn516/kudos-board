@@ -1,0 +1,88 @@
+import React, { useState } from 'react';
+import '../App.css';
+
+const AddBoardModal = ({ onClose, onBoardCreated }) => {
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [author, setAuthor] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!title || !category) {
+      alert("Title and category are required!");
+      return;
+    }
+
+    const newBoard = {
+      title,
+      category,
+      author: author || null
+    };
+
+    try {
+      const response = await fetch('http://localhost:3000/api/boards', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newBoard)
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to create board");
+      }
+
+      const created = await response.json();
+      console.log("Board created:", created);
+
+      onBoardCreated();
+      onClose(); 
+    } catch (err) {
+      alert("Error: " + err.message);
+    }
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal">
+        <button className="close-button" onClick={onClose}>×</button>
+        <h2>Create a New Board</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Title:
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Category:
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+            >
+              <option value="">Select a category</option>
+              <option value="Celebration">Celebration</option>
+              <option value="Thank You">Thank You</option>
+              <option value="Inspiration">Inspiration</option>
+            </select>
+          </label>
+          <label>
+            Author:
+            <input
+              type="text"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+            />
+          </label>
+          <button type="submit">Create Board</button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default AddBoardModal;
