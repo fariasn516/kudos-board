@@ -1,10 +1,6 @@
-import { useEffect } from "react";
 import BoardCard from "./BoardCard";
 
 const BoardList = ({ boards }) => {
-
-    useEffect(() => {
-    });
 
   return (
     <div className="board-list-component">
