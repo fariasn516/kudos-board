@@ -7,7 +7,7 @@ function Card(props) {
         <p className="card-description">{props.description}</p>
         <img className="card-image" src={props.gif} alt={`${props.title} Card`} />
         <div className="card-buttons">
-          <button onClick={props.onUpvote}>Upvote ({props.upvotes})</button>
+          <button className="card-upvote-button" onClick={props.onUpvote}>Upvote ({props.upvotes})</button>
           <button className="card-delete-button">Delete</button>
         </div>
       </article>
