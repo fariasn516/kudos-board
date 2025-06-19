@@ -30,17 +30,17 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
     - [ ] Thank you
     - [ ] Inspiration
   - [ ] When a category is clicked, boards matching the specified category are displayed.
-- [ ] **Search Functionality**
-  - [ ] Users can use a search bar to search for boards by title on the home page.
-  - [ ] The search bar should include:
-    - [ ] Text input field
-    - [ ] Submit/Search Button
-    - [ ] Clear Mechanism
-  - [ ] Boards with a title containing the search query in the text input field are displayed in a grid view when the user:
-    - [ ] Presses the Enter key
-    - [ ] Clicks the Submit/Search button
-  - [ ] User can delete all text from the text input field.
-  - [ ] When all text is cleared from the text input field, all boards are displayed in a grid view
+- [x] **Search Functionality**
+  - [x] Users can use a search bar to search for boards by title on the home page.
+  - [x] The search bar should include:
+    - [x] Text input field
+    - [x] Submit/Search Button
+    - [x] Clear Mechanism
+  - [x] Boards with a title containing the search query in the text input field are displayed in a grid view when the user:
+    - [x] Presses the Enter key
+    - [x] Clicks the Submit/Search button
+  - [x] User can delete all text from the text input field.
+  - [x] When all text is cleared from the text input field, all boards are displayed in a grid view
 - [x] **View Board**
   - [x] Users can click on a board in the grid view to navigate to a new page containing that board's details.
 - [ ] **Add New Board**
