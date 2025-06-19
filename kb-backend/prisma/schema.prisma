@@ -23,7 +23,7 @@ model Board {
 }
 
 model Card {
-  id           Int      @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
   description String
   gif         String
@@ -31,4 +31,5 @@ model Card {
   boardId     Int
   board       Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
+  upvotes     Int      @default(0)
 }
