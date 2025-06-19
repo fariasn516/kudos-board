@@ -11,6 +11,20 @@ const BoardPage = () => {
   const boardData = location.state;
   const [cards, setCards] = useState([]);
 
+  const handleDeleteCard = async (cardId) => {
+    try {
+      const res = await fetch(`http://localhost:3000/api/cards/${cardId}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) throw new Error("Failed to delete");
+
+      setCards((prev) => prev.filter((c) => c.id !== cardId));
+    } catch (err) {
+      alert("Error: " + err.message);
+    }
+  };
+
   const handleUpvote = async (cardId) => {
     const prevCards = cards;
     const newCards = cards.map((c) =>
@@ -66,7 +80,7 @@ const BoardPage = () => {
           <p>Category: {boardData.category}</p>
         </div>
         <AddCard />
-        <CardList cards={cards} onUpvote={handleUpvote} />
+        <CardList cards={cards} onUpvote={handleUpvote} onDelete={handleDeleteCard}/>
       </main>
       <Footer />
     </div>
