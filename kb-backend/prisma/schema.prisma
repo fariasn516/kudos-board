@@ -29,6 +29,6 @@ model Card {
   gif         String
   author      String?
   boardId     Int
-  board       Board    @relation(fields: [boardId], references: [id])
+  board       Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
 }

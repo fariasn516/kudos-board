@@ -44,6 +44,25 @@ const HomePage = () => {
       });
   };
 
+  const handleDeleteBoard = async (id) => {
+    console.log("Deleting board id:", id);
+    try {
+      const res = await fetch(`http://localhost:3000/api/boards/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        const { message } = await res.json().catch(() => ({}));
+        throw new Error(message || `Request failed (${res.status})`);
+      }
+
+      fetchBoards(searchTitle, selectedCategory);
+    } catch (err) {
+      alert("Error deleting board: " + err.message);
+    }
+  };
+
+
   useEffect(() => {
     fetchBoards();
   }, []);
@@ -76,7 +95,7 @@ const HomePage = () => {
           onBoardCreated={() => fetchBoards(searchTitle, selectedCategory)}
         />
       )}
-      <BoardList boards={boards} />
+      <BoardList boards={boards} onDelete={handleDeleteBoard}/>
       <Footer />
     </div>
   );

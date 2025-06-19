@@ -1,6 +1,6 @@
 import BoardCard from "./BoardCard";
 
-const BoardList = ({ boards }) => {
+const BoardList = ({ boards, onDelete }) => {
 
   return (
     <div className="board-list-component">
@@ -12,6 +12,7 @@ const BoardList = ({ boards }) => {
               title={board.title}
               image={`https://picsum.photos/200/300?random=${board.id}`}
               category={board.category}
+              onDelete={onDelete}
             />
           </li>
         ))}
