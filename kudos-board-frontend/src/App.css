@@ -224,3 +224,31 @@ footer {
   border: none;
   font-size: 1.5rem;
 }
+
+.gif-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.gif-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+}
+
+.gif-thumb.selected {
+  border-color: #0070f3;
+}
+
+.gif-preview {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
