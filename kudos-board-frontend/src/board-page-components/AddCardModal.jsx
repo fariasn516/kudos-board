@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../App.css";
-const BACKEND_URL = import.meta.env.VITE_API_KEY;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const AddCardModal = ({ boardId, onClose, onCardCreated }) => {
   const [title, setTitle] = useState("");
