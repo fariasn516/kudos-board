@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../App.css";
+const BACKEND_URL = import.meta.env.VITE_API_KEY;
 
 const AddCardModal = ({ boardId, onClose, onCardCreated }) => {
   const [title, setTitle] = useState("");
@@ -40,7 +41,7 @@ const AddCardModal = ({ boardId, onClose, onCardCreated }) => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/boards/${boardId}/cards`,
+        `${BACKEND_URL}/api/boards/${boardId}/cards`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

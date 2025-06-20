@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+const BACKEND_URL = import.meta.env.VITE_API_KEY;
 
 const CommentModal = ({ card, onClose, onCommentAdded }) => {
   const [body, setBody] = useState("");
@@ -9,7 +10,7 @@ const CommentModal = ({ card, onClose, onCommentAdded }) => {
     if (!body.trim()) return alert("Comment message is required");
 
     try {
-      const res = await fetch(`http://localhost:3000/api/cards/${card.id}/comments`, {
+      const res = await fetch(`${BACKEND_URL}/api/cards/${card.id}/comments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ body, author: author || null })

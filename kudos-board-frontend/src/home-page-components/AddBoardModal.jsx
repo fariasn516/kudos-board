@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
+const BACKEND_URL = import.meta.env.VITE_API_KEY;
 
 const AddBoardModal = ({ onClose, onBoardCreated }) => {
   const [title, setTitle] = useState("");
@@ -21,7 +22,7 @@ const AddBoardModal = ({ onClose, onBoardCreated }) => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/api/boards', {
+      const response = await fetch(`${BACKEND_URL}:3000/api/boards`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newBoard)
@@ -36,7 +37,7 @@ const AddBoardModal = ({ onClose, onBoardCreated }) => {
       console.log("Board created:", created);
 
       onBoardCreated();
-      onClose(); 
+      onClose();
     } catch (err) {
       alert("Error: " + err.message);
     }
