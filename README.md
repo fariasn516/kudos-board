@@ -2,7 +2,7 @@
 
 Submitted by: **Nancy Farias**
 
-Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
+Deployed Application (**required**): [Kudos Board Deployed Site](https://kudos-board-frontend-rc04.onrender.com/)
 
 ### Application Features
 
@@ -79,9 +79,9 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
 - [x] **Delete Card**
   - [x] Users can delete cards.
   - [x] When the user clicks the delete button for a card, the card disappears from the grid of cards.
-- [ ] **Deployment**
-  - [ ] Website is deployed via Render.
-  - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: For ease of grading, please use the deployed version of your website when creating your walkthrough.
+- [x] **Deployment**
+  - [x] Website is deployed via Render.
+  - [x] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: For ease of grading, please use the deployed version of your website when creating your walkthrough.
 
 ####  Stretch Features
 
@@ -92,7 +92,7 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
   - [x] Users can view comments on card in a pop-up modal that displays the card's:
     - [x] Text message
     - [x] Gif
-    - [ ] Author (if specified)
+    - [x] Author (if specified)
     - [x] A list of the card's comments and each comment's:
       - [x] Message body
       - [x] Author (if specified)
@@ -105,14 +105,14 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
   - [x] When dark mode is enabled:
     - [x] Text and icons use a light color
     - [x] The background uses a dark color
-    - [ ] Color contrast has at least a 4.5:1 ratio using this [color contrast checker](https://webaim.org/resources/contrastchecker/)
+    - [x] Color contrast has at least a 4.5:1 ratio using this [color contrast checker](https://webaim.org/resources/contrastchecker/)
   - [x] When light mode is enabled:
     - [x] Text and icons use a dark color
     - [x] The background uses a light color
     - [ ] Color contrast has at least a 4.5:1 ratio using this [color contrast checker](https://webaim.org/resources/contrastchecker/)
   - [x] The chosen mode (light or dark) persists when navigating from home page to board pages and vice versa.
   - [x] When the user first visits the site the theme defaults to light mode.
-  - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: To ease the grading process, please use the [color contrast checker](https://webaim.org/resources/contrastchecker/) to demonstrate to the grading team that text and background colors on your website have appropriate contrast in both light and dark mode. The Contrast Ratio should be above 4.5:1 and should have a green box surrounding it.
+  - [x] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: To ease the grading process, please use the [color contrast checker](https://webaim.org/resources/contrastchecker/) to demonstrate to the grading team that text and background colors on your website have appropriate contrast in both light and dark mode. The Contrast Ratio should be above 4.5:1 and should have a green box surrounding it.
 - [x] **Pinned Cards**
   - [x] Users can pin a card to the top of the board.
   - [x] A Pin button is displayed on each card.
@@ -135,28 +135,41 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
-
 `ADD_EMBEDDED_CODE_HERE`
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+I think the labs and previous assignments prepared me very well for this project overall. One area that could have been covered more in depth is deployment. That said, I was able to figure it out using online documentation when needed.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
 
-Add your response here
+If I had more time, I would’ve focused more on the overall structure of the project—thinking more holistically from backend to frontend—instead of treating them as completely separate parts.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+I think my MVP features and React functionality went really well. One thing I noticed from my peers was that some uploaded their backend to Render earlier, right after it was complete. I wish I had done that sooner—it would’ve made integration smoother.
 
 ### Open-source libraries used
 
-- Add any links to open-source libraries used in your project.
+#### Frontend
+- [React](https://reactjs.org/)
+- [React DOM](https://reactjs.org/docs/react-dom.html)
+- [React Router DOM](https://reactrouter.com/)
+- [Vite](https://vitejs.dev/)
+
+#### Backend
+- [Express.js](https://expressjs.com/)
+- [Prisma](https://www.prisma.io/)
+- [CORS](https://github.com/expressjs/cors)
+- [Helmet](https://helmetjs.github.io/)
+
+#### External APIs
+- [GIPHY API](https://developers.giphy.com/)
 
 ### Shout out
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+
+Shout out to Alikem, who helped me upload to Render and explained how to properly use .env variables!
