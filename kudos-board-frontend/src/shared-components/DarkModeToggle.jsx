@@ -10,7 +10,7 @@ const DarkModeToggle = () => {
       onClick={toggleTheme}
       aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
     >
-      {isDarkMode ? '☀️' : '🌙'}
+      {isDarkMode ? '☀️' : '🌚'}
     </button>
   );
 };

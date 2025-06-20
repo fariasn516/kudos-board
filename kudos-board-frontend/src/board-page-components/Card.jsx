@@ -9,7 +9,7 @@ function Card(props) {
     onUpvote,
     onDelete,
     onPinToggle,
-    onCommentClick, 
+    onCommentClick,
     comments,
     author
   } = props;
@@ -34,7 +34,7 @@ function Card(props) {
         <button className="card-delete-button" onClick={onDelete}>
           Delete
         </button>
-        <button onClick={() => onCommentClick(props)}>View Comments</button>
+        <button className="card-comment-button" onClick={() => onCommentClick(props)}>View Comments</button>
       </div>
     </article>
   );
