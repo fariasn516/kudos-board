@@ -14,20 +14,20 @@ const BoardPage = () => {
   const fetchCards = () =>
     fetch(`http://localhost:3000/api/boards/${board.id}/cards`)
       .then((r) => r.json())
-      .then(setCards)
-      .catch((e) => console.error(e));
+      .then((data) =>
+        setCards(Array.isArray(data) ? data : data.cards)
+      )
+      .catch(console.error);
 
   const handleUpvote = async (id) => {
     setCards((prev) =>
       prev.map((c) => (c.id === id ? { ...c, upvotes: c.upvotes + 1 } : c))
     );
-    const card = cards.find((c) => c.id === id);
-    if (!card) return;
     try {
       await fetch(`http://localhost:3000/api/cards/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ upvotes: card.upvotes + 1 }),
+        body: JSON.stringify({ upvotes: cards.find(c => c.id === id).upvotes + 1 })
       });
     } catch {
       fetchCards();
@@ -38,21 +38,20 @@ const BoardPage = () => {
     try {
       await fetch(`http://localhost:3000/api/cards/${id}`, { method: 'DELETE' });
       setCards((prev) => prev.filter((c) => c.id !== id));
-    } catch (e) {
+    } catch {
       alert('Failed to delete');
     }
   };
 
   useEffect(() => {
-    return () => {};
-  }, []);
+    fetchCards();
+  }, [board.id]);
 
   return (
     <div className="board-page">
       <Header />
       <main className="board-content">
         <Link to="/"> Back to Home</Link>
-
         <h1>{board.title}</h1>
         <p>Category: {board.category}</p>
         <AddCard onClick={() => setShowModal(true)} />
@@ -63,9 +62,11 @@ const BoardPage = () => {
             onCardCreated={fetchCards}
           />
         )}
-        <CardList cards={cards}
+        <CardList
+          cards={cards}
           onUpvote={handleUpvote}
-          onDelete={handleDelete} />
+          onDelete={handleDelete}
+        />
       </main>
       <Footer />
     </div>
