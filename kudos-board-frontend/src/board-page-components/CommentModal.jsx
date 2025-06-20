@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const CommentModal = ({ card, onClose, onCommentAdded }) => {
@@ -7,7 +8,10 @@ const CommentModal = ({ card, onClose, onCommentAdded }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!body.trim()) return alert("Comment message is required");
+    if (!body.trim()) {
+      alert("Comment message is required");
+      return;
+    }
 
     try {
       const res = await fetch(`${BACKEND_URL}/api/cards/${card.id}/comments`, {
@@ -17,8 +21,8 @@ const CommentModal = ({ card, onClose, onCommentAdded }) => {
       });
 
       if (!res.ok) throw new Error("Failed to add comment");
-      const newComment = await res.json();
 
+      const newComment = await res.json();
       setBody("");
       setAuthor("");
       onCommentAdded(newComment);
@@ -31,23 +35,27 @@ const CommentModal = ({ card, onClose, onCommentAdded }) => {
     <div className="modal-overlay">
       <div className="modal">
         <button className="close-button" onClick={onClose}>×</button>
+
         <h2>{card.title}</h2>
         <p>{card.description}</p>
-        <img src={card.gif} alt={card.title} />
+        <img src={card.gif} alt={card.title} className="modal-image" />
         {card.author && <p><strong>Author:</strong> {card.author}</p>}
+
         <hr />
+
         <h3>Comments</h3>
         {card.comments?.length > 0 ? (
-          card.comments.map((c) => (
-            <div key={c.id} className="comment">
-              <p>{c.body}</p>
-              {c.author && <small>— {c.author}</small>}
+          card.comments.map(({ id, body, author }) => (
+            <div key={id} className="comment">
+              <p>{body}</p>
+              {author && <small>— {author}</small>}
             </div>
           ))
         ) : (
           <p>No comments yet</p>
         )}
-        <form onSubmit={handleSubmit}>
+
+        <form onSubmit={handleSubmit} className="comment-form">
           <textarea
             placeholder="Write a comment"
             value={body}

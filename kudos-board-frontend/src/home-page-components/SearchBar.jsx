@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import '../App.css';
 
 function SearchBar({ searchTitle, setSearchTitle, onSearch, onClear }) {
@@ -9,9 +9,11 @@ function SearchBar({ searchTitle, setSearchTitle, onSearch, onClear }) {
           type="text"
           placeholder="Search boards..."
           value={searchTitle}
-          onChange={(e) => setSearchTitle(e.target.value)}
+          onChange={({ target }) => setSearchTitle(target.value)}
         />
-        <button type="submit" className="search-button">Search</button>
+        <button type="submit" className="search-button">
+          Search
+        </button>
         <button
           type="button"
           className="clear-button"

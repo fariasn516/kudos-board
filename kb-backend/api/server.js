@@ -4,13 +4,10 @@ const Board = require('./board-model.js')
 const Card = require('./card-model.js')
 const Comment = require('./comment-model.js')
 const helmet = require('helmet')
-
 const server = express()
 server.use(helmet())
 server.use(express.json())
 server.use(cors())
-
-// ---------- BOARD ENDPOINTS ----------
 
 // [GET] /api/boards/:id
 server.get('/api/boards/:id', async (req, res, next) => {
@@ -50,7 +47,6 @@ server.put('/api/boards/:id', async (req, res, next) => {
   const id = Number(req.params.id)
   const changes = req.body
   const hasMod = changes.title || changes.category || changes.author
-
   try {
     const board = await Board.findById(id)
     if (board && hasMod) {
@@ -75,9 +71,6 @@ server.delete('/api/boards/:id', async (req, res, next) => {
     }
   } catch (err) { next(err) }
 })
-
-
-// ---------- CARD ENDPOINTS ----------
 
 // [GET] /api/boards/:id/cards
 server.get('/api/boards/:id/cards', async (req, res, next) => {
@@ -138,7 +131,7 @@ server.get("/api/cards/:id/comments", async (req, res, next) => {
   } catch (err) { next(err); }
 });
 
-// POST /api/cards/:id/comments   body: { body, author? }
+// POST /api/cards/:id/comments   body: { body, author, etc. }
 server.post("/api/cards/:id/comments", async (req, res, next) => {
   const cardId = Number(req.params.id);
   const { body, author = null } = req.body;
@@ -151,8 +144,7 @@ server.post("/api/cards/:id/comments", async (req, res, next) => {
 });
 
 
-// ---------- CATCH-ALL & ERROR HANDLER ----------
-
+// catch all error handler
 server.use('/*', (req, res, next) =>
   next({ status: 404, message: 'Not found' })
 )

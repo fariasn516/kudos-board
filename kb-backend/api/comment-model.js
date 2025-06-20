@@ -2,7 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 module.exports = {
-  /* GET /api/cards/:id/comments */
+  // Get all comments for a card, newest first
   async findByCard(cardId) {
     return prisma.comment.findMany({
       where: { cardId },
@@ -10,7 +10,7 @@ module.exports = {
     });
   },
 
-  /* POST /api/cards/:id/comments */
+  // Create a new comment
   async create(data) {
     return prisma.comment.create({ data });
   },

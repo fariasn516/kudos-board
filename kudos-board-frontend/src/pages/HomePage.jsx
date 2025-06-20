@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../shared-components/Header';
+import Footer from '../shared-components/Footer';
 import SearchBar from '../home-page-components/SearchBar';
 import SortButtons from '../home-page-components/SortButtons';
 import BoardList from '../home-page-components/BoardList';
 import AddBoard from '../home-page-components/AddBoard';
-import Footer from '../shared-components/Footer';
 import AddBoardModal from '../home-page-components/AddBoardModal';
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const HomePage = () => {
@@ -14,7 +15,7 @@ const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const fetchBoards = (title = "", category = "All") => {
+  const fetchBoards = async (title = "", category = "All") => {
     let url = `${BACKEND_URL}/api/boards`;
     const params = [];
 
@@ -23,32 +24,45 @@ const HomePage = () => {
       params.push(`category=${encodeURIComponent(category)}`);
     }
 
-    if (params.length > 0) {
+    if (params.length) {
       url += `?${params.join("&")}`;
     }
 
-    fetch(url)
-      .then(res => {
-        if (!res.ok) throw new Error(`Status: ${res.status}`);
-        return res.json();
-      })
-      .then(data => {
-        const sorted = category === "Recent"
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Status: ${res.status}`);
+      const data = await res.json();
+
+      const sortedBoards =
+        category === "Recent"
           ? [...data]
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
             .slice(0, 6)
           : data;
 
-        setBoards(sorted);
-      })
-      .catch(err => {
-        console.error("Error fetching boards:", err);
-        setBoards([]);
-      });
+      setBoards(sortedBoards);
+    } catch (err) {
+      console.error("Error fetching boards:", err);
+      setBoards([]);
+    }
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    fetchBoards(searchTitle, selectedCategory);
+  };
+
+  const clearSearch = () => {
+    setSearchTitle("");
+    fetchBoards("", selectedCategory);
+  };
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    fetchBoards(searchTitle, category);
   };
 
   const handleDeleteBoard = async (id) => {
-    console.log("Deleting board id:", id);
     try {
       const res = await fetch(`${BACKEND_URL}/api/boards/${id}`, {
         method: "DELETE",
@@ -65,45 +79,37 @@ const HomePage = () => {
     }
   };
 
-
   useEffect(() => {
     fetchBoards();
   }, []);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    fetchBoards(searchTitle, selectedCategory);
-  };
-
-  const clearSearch = () => {
-    setSearchTitle("");
-    fetchBoards("", selectedCategory);
-  };
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    fetchBoards(searchTitle, category);
-  };
-
   return (
     <div className="home-page">
       <Header />
+
       <SearchBar
         searchTitle={searchTitle}
         setSearchTitle={setSearchTitle}
         onSearch={handleSearch}
         onClear={clearSearch}
       />
+
       <SortButtons
         selectedCategory={selectedCategory}
-        onCategoryClick={handleCategoryClick} />
+        onCategoryClick={handleCategoryClick}
+      />
+
       <AddBoard onClick={() => setShowModal(true)} />
+
       {showModal && (
         <AddBoardModal
           onClose={() => setShowModal(false)}
           onBoardCreated={() => fetchBoards(searchTitle, selectedCategory)}
         />
       )}
+
       <BoardList boards={boards} onDelete={handleDeleteBoard} />
+
       <Footer />
     </div>
   );

@@ -8,7 +8,6 @@ const DarkModeToggle = () => {
     <button
       className="dark-mode-toggle"
       onClick={toggleTheme}
-      aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
     >
       {isDarkMode ? '☀️' : '🌚'}
     </button>
