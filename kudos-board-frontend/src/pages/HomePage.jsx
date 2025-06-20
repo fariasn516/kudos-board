@@ -32,11 +32,13 @@ const HomePage = () => {
         return res.json();
       })
       .then(data => {
-        const sortedData = category === "Recent"
-          ? [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        const sorted = category === "Recent"
+          ? [...data]
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            .slice(0, 6)
           : data;
 
-        setBoards(sortedData);
+        setBoards(sorted);
       })
       .catch(err => {
         console.error("Error fetching boards:", err);
@@ -72,6 +74,10 @@ const HomePage = () => {
     fetchBoards(searchTitle, selectedCategory);
   };
 
+  const clearSearch = () => {
+    setSearchTitle("");
+    fetchBoards("", selectedCategory);
+  };
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     fetchBoards(searchTitle, category);
@@ -84,6 +90,7 @@ const HomePage = () => {
         searchTitle={searchTitle}
         setSearchTitle={setSearchTitle}
         onSearch={handleSearch}
+        onClear={clearSearch}
       />
       <SortButtons
         selectedCategory={selectedCategory}
@@ -95,7 +102,7 @@ const HomePage = () => {
           onBoardCreated={() => fetchBoards(searchTitle, selectedCategory)}
         />
       )}
-      <BoardList boards={boards} onDelete={handleDeleteBoard}/>
+      <BoardList boards={boards} onDelete={handleDeleteBoard} />
       <Footer />
     </div>
   );
