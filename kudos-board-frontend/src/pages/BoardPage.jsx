@@ -109,10 +109,14 @@ const BoardPage = () => {
     <div className="board-page">
       <Header />
       <main className="board-content">
-        <Link to="/"> Back to Home</Link>
-        <h1>{board.title}</h1>
-        <p>Category: {board.category}</p>
-        <AddCard onClick={() => setShowModal(true)} />
+        <div className="board-header">
+          <Link to="/" className="back-home-link" title="Back to Home">🏠</Link>
+          <div className="board-info">
+            <h1 className="board-title">{board.title}</h1>
+            <p className="board-category">{board.category}</p>
+          </div>
+          <AddCard onClick={() => setShowModal(true)} />
+        </div>
         {showModal && (
           <AddCardModal
             boardId={board.id}
