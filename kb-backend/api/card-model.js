@@ -6,7 +6,7 @@ module.exports = {
     async find(where) {
         // GET http://localhost:5432/api/card?title=blah
         // SELECT * FROM "Card" WHERE type='dog';
-        const cards = await prisma.card.findMany({ where })
+        const cards = await prisma.card.findMany({ where, include: { comments: true } })
         return cards
     },
 
@@ -41,7 +41,7 @@ module.exports = {
     async findByBoardId(boardId) {
         // GET http://localhost:5432/api/card?boardId=1
         // SELECT * FROM "Card" WHERE boardId = 1;
-        const cards = await prisma.card.findMany({ where: { boardId } })
+        const cards = await prisma.card.findMany({ where: { boardId }, include: { comments: true } })
         return cards
     }
 }

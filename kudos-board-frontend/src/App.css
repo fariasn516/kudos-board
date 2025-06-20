@@ -348,3 +348,86 @@ footer {
 .card.pinned {
   border: 2px solid #eab308;
 }
+
+.comment {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px 0;
+  text-align: left;
+}
+
+.comment p {
+  margin: 0 0 8px 0;
+  color: var(--text-color);
+}
+
+.comment small {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.modal form {
+  margin-top: 20px;
+}
+
+.modal textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.modal input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.modal button[type="submit"] {
+  background: var(--button-active);
+  color: var(--button-active-text);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.modal button[type="submit"]:hover {
+  background: var(--button-hover);
+  color: var(--text-color);
+}
+
+.modal img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.modal h2 {
+  margin-top: 0;
+  color: var(--text-color);
+}
+
+.modal h3 {
+  color: var(--text-color);
+  margin: 20px 0 10px 0;
+}
+
+.modal hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 20px 0;
+}

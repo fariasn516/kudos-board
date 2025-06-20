@@ -34,4 +34,14 @@ model Card {
   upvotes     Int      @default(0)
   pinned      Boolean   @default(false)
   pinnedAt    DateTime?
+  comments    Comment[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  body      String
+  author    String?
+  cardId    Int
+  card      Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
 }

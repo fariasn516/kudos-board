@@ -5,11 +5,13 @@ import Footer from '../shared-components/Footer';
 import CardList from '../board-page-components/CardList';
 import AddCard from '../board-page-components/AddCard';
 import AddCardModal from '../board-page-components/AddCardModal';
+import CommentModal from '../board-page-components/CommentModal';
 
 const BoardPage = () => {
   const { state: board } = useLocation();
   const [cards, setCards] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const sortCards = (list) =>
     [...list].sort((a, b) => {
@@ -24,7 +26,17 @@ const BoardPage = () => {
   const fetchCards = () =>
     fetch(`http://localhost:3000/api/boards/${board.id}/cards`)
       .then((r) => r.json())
-      .then((data) => setCards(sortCards(Array.isArray(data) ? data : data.cards)))
+      .then((data) => {
+        const newCards = sortCards(Array.isArray(data) ? data : data.cards);
+        setCards(newCards);
+
+        if (selectedCard) {
+          const updatedCard = newCards.find(card => card.id === selectedCard.id);
+          if (updatedCard) {
+            setSelectedCard(updatedCard);
+          }
+        }
+      })
       .catch(console.error);
 
   const handleUpvote = async (id) => {
@@ -43,6 +55,10 @@ const BoardPage = () => {
     } catch {
       fetchCards();
     }
+  };
+
+  const handleCommentClick = (card) => {
+    setSelectedCard(card);
   };
 
   const handlePinToggle = async (id, currentlyPinned) => {
@@ -108,7 +124,15 @@ const BoardPage = () => {
           onUpvote={handleUpvote}
           onPinToggle={handlePinToggle}
           onDelete={handleDelete}
+          onCommentClick={handleCommentClick}
         />
+        {selectedCard && (
+          <CommentModal
+            card={selectedCard}
+            onClose={() => setSelectedCard(null)}
+            onCommentAdded={fetchCards}
+          />
+        )}
       </main>
       <Footer />
     </div>
