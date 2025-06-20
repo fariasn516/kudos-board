@@ -1,6 +1,6 @@
 import Card from "./Card";
 
-const CardList = ({ cards, onUpvote, onDelete }) => {
+const CardList = ({ cards, onUpvote, onDelete, onPinToggle }) => {
     return (
         <div className="card-list-component">
             <ul className="card-list">
@@ -14,6 +14,8 @@ const CardList = ({ cards, onUpvote, onDelete }) => {
                             upvotes={card.upvotes}
                             onUpvote={() => onUpvote(card.id)}
                             onDelete={() => onDelete(card.id)}
+                            pinned={card.pinned}
+                            onPinToggle={() => onPinToggle(card.id, card.pinned)}
                         />
                     </li>
                 ))}

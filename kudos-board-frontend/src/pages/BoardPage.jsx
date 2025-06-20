@@ -11,23 +11,64 @@ const BoardPage = () => {
   const [cards, setCards] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  const sortCards = (list) =>
+    [...list].sort((a, b) => {
+      if (a.pinned && b.pinned) {
+        return new Date(b.pinnedAt) - new Date(a.pinnedAt);
+      }
+      if (a.pinned) return -1;
+      if (b.pinned) return 1;
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+
   const fetchCards = () =>
     fetch(`http://localhost:3000/api/boards/${board.id}/cards`)
       .then((r) => r.json())
-      .then((data) =>
-        setCards(Array.isArray(data) ? data : data.cards)
-      )
+      .then((data) => setCards(sortCards(Array.isArray(data) ? data : data.cards)))
       .catch(console.error);
 
   const handleUpvote = async (id) => {
     setCards((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, upvotes: c.upvotes + 1 } : c))
+      sortCards(prev.map((c) => (c.id === id ? { ...c, upvotes: c.upvotes + 1 } : c)))
     );
+
     try {
       await fetch(`http://localhost:3000/api/cards/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ upvotes: cards.find(c => c.id === id).upvotes + 1 })
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          upvotes: cards.find((c) => c.id === id).upvotes + 1,
+        }),
+      });
+    } catch {
+      fetchCards();
+    }
+  };
+
+  const handlePinToggle = async (id, currentlyPinned) => {
+    const now = new Date().toISOString();
+    setCards((prev) =>
+      sortCards(
+        prev.map((c) =>
+          c.id === id
+            ? {
+              ...c,
+              pinned: !currentlyPinned,
+              pinnedAt: currentlyPinned ? null : now,
+            }
+            : c
+        )
+      )
+    );
+
+    try {
+      await fetch(`http://localhost:3000/api/cards/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pinned: !currentlyPinned,
+          pinnedAt: currentlyPinned ? null : now
+        }),
       });
     } catch {
       fetchCards();
@@ -65,6 +106,7 @@ const BoardPage = () => {
         <CardList
           cards={cards}
           onUpvote={handleUpvote}
+          onPinToggle={handlePinToggle}
           onDelete={handleDelete}
         />
       </main>

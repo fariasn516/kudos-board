@@ -96,7 +96,7 @@ body {
 .search-button:hover,
 .clear-button:hover,
 .add-board-button:hover,
-.add-card-button:hover  {
+.add-card-button:hover {
   background: var(--button-hover);
 }
 
@@ -330,4 +330,21 @@ footer {
 
 .dark-mode-toggle:hover {
   background: var(--button-hover);
+}
+
+.pin-button {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+.pin-button.active {
+  opacity: 1;
+  color: #eab308;
+}
+
+.card.pinned {
+  border: 2px solid #eab308;
 }
