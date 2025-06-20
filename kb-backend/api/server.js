@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const Board = require('./board-model.js')
 const Card = require('./card-model.js')
+const Comment = require('./comment-model.js')
 const helmet = require('helmet')
 
 const server = express()
@@ -104,7 +105,7 @@ server.post('/api/boards/:id/cards', async (req, res, next) => {
 // [PUT] /api/cards/:id
 server.put('/api/cards/:id', async (req, res, next) => {
   const id = Number(req.params.id);
-  const changes = req.body;       
+  const changes = req.body;
 
   try {
     const updated = await Card.update(id, changes);
@@ -128,6 +129,27 @@ server.delete('/api/cards/:id', async (req, res, next) => {
   } catch (err) { next(err) }
 })
 
+// GET /api/cards/:id/comments
+server.get("/api/cards/:id/comments", async (req, res, next) => {
+  const id = Number(req.params.id);
+  try {
+    const comments = await Comment.findByCard(id);
+    res.json(comments);
+  } catch (err) { next(err); }
+});
+
+// POST /api/cards/:id/comments   body: { body, author? }
+server.post("/api/cards/:id/comments", async (req, res, next) => {
+  const cardId = Number(req.params.id);
+  const { body, author = null } = req.body;
+  if (!body) return next({ status: 422, message: "comment body required" });
+
+  try {
+    const created = await Comment.create({ body, author, cardId });
+    res.status(201).json(created);
+  } catch (err) { next(err); }
+});
+
 
 // ---------- CATCH-ALL & ERROR HANDLER ----------
 
@@ -138,7 +160,7 @@ server.use('/*', (req, res, next) =>
 server.use((err, req, res, next) => {
   const { status = 500, message } = err
   console.error(message)
-  res.status(status).json({ message })   // hide details in prod
+  res.status(status).json({ message })
 })
 
 module.exports = server

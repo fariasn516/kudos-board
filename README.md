@@ -85,18 +85,18 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 ####  Stretch Features
 
-- [ ] **Comments**
-  - [ ] Users can add comments to cards.
-  - [ ] To successfully add a comment, users must specify a text message body.
-  - [ ] Users are given the option to specify the author of the comment.
-  - [ ] Users can view comments on card in a pop-up modal that displays the card's:
-    - [ ] Text message
-    - [ ] Gif
+- [x] **Comments**
+  - [x] Users can add comments to cards.
+  - [x] To successfully add a comment, users must specify a text message body.
+  - [x] Users are given the option to specify the author of the comment.
+  - [x] Users can view comments on card in a pop-up modal that displays the card's:
+    - [x] Text message
+    - [x] Gif
     - [ ] Author (if specified)
-    - [ ] A list of the card's comments and each comment's:
-      - [ ] Message body
-      - [ ] Author (if specified)
-  - [ ] Users can add multiple comments to a single card.
+    - [x] A list of the card's comments and each comment's:
+      - [x] Message body
+      - [x] Author (if specified)
+  - [x] Users can add multiple comments to a single card.
 - [x] **Dark Mode**
   - [x] Users can toggle between light mode and dark mode using a button displayed on the:
     - [x] Home Page
