@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-const BACKEND_URL = import.meta.env.VITE_API_KEY;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const CommentModal = ({ card, onClose, onCommentAdded }) => {
   const [body, setBody] = useState("");
