@@ -22,7 +22,7 @@ const AddBoardModal = ({ onClose, onBoardCreated }) => {
     };
 
     try {
-      const response = await fetch(`${BACKEND_URL}:3000/api/boards`, {
+      const response = await fetch(`${BACKEND_URL}/api/boards`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newBoard)
