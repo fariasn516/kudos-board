@@ -32,6 +32,7 @@ const CommentModal = ({ card, onClose, onCommentAdded }) => {
       <div className="modal">
         <button className="close-button" onClick={onClose}>×</button>
         <h2>{card.title}</h2>
+        <p>{card.description}</p>
         <img src={card.gif} alt={card.title} />
         {card.author && <p><strong>Author:</strong> {card.author}</p>}
         <hr />
