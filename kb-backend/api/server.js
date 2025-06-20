@@ -104,9 +104,10 @@ server.post('/api/boards/:id/cards', async (req, res, next) => {
 // [PUT] /api/cards/:id
 server.put('/api/cards/:id', async (req, res, next) => {
   const id = Number(req.params.id);
-  const { upvotes } = req.body;
+  const changes = req.body;       
+
   try {
-    const updated = await Card.update(id, { upvotes });
+    const updated = await Card.update(id, changes);
     res.json(updated);
   } catch (err) {
     next(err);
