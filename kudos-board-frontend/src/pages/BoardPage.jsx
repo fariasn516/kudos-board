@@ -6,7 +6,7 @@ import CardList from '../board-page-components/CardList';
 import AddCard from '../board-page-components/AddCard';
 import AddCardModal from '../board-page-components/AddCardModal';
 import CommentModal from '../board-page-components/CommentModal';
-const BACKEND_URL = import.meta.env.VITE_API_KEY;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const BoardPage = () => {
   const { state: board } = useLocation();
