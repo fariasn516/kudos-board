@@ -25,7 +25,7 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
 - [x] **Filter Boards**
   - [x] Home page includes navigation bar, drop down, or some other mechanism which allows users to filter boards by the following categories:
     - [x] All/Home (displays all boards)
-    - [ ] Recent (displays the 6 most recently created boards)
+    - [x] Recent (displays the 6 most recently created boards)
     - [x] Celebration
     - [x] Thank you
     - [x] Inspiration
@@ -40,7 +40,7 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
     - [x] Presses the Enter key
     - [x] Clicks the Submit/Search button
   - [x] User can delete all text from the text input field.
-  - [ ] When all text is cleared from the text input field, all boards are displayed in a grid view
+  - [x] When all text is cleared from the text input field, all boards are displayed in a grid view
 - [x] **View Board**
   - [x] Users can click on a board in the grid view to navigate to a new page containing that board's details.
 - [x] **Add New Board**
@@ -97,21 +97,21 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
       - [ ] Message body
       - [ ] Author (if specified)
   - [ ] Users can add multiple comments to a single card.
-- [ ] **Dark Mode**
-  - [ ] Users can toggle between light mode and dark mode using a button displayed on the:
-    - [ ] Home Page
-    - [ ] Board Pages
-  - [ ] When the button is clicked, the color theme switches to the opposite of the current mode.
-  - [ ] When dark mode is enabled:
-    - [ ] Text and icons use a light color
-    - [ ] The background uses a dark color
+- [x] **Dark Mode**
+  - [x] Users can toggle between light mode and dark mode using a button displayed on the:
+    - [x] Home Page
+    - [x] Board Pages
+  - [x] When the button is clicked, the color theme switches to the opposite of the current mode.
+  - [x] When dark mode is enabled:
+    - [x] Text and icons use a light color
+    - [x] The background uses a dark color
     - [ ] Color contrast has at least a 4.5:1 ratio using this [color contrast checker](https://webaim.org/resources/contrastchecker/)
-  - [ ] When light mode is enabled:
-    - [ ] Text and icons use a dark color
-    - [ ] The background uses a light color
+  - [x] When light mode is enabled:
+    - [x] Text and icons use a dark color
+    - [x] The background uses a light color
     - [ ] Color contrast has at least a 4.5:1 ratio using this [color contrast checker](https://webaim.org/resources/contrastchecker/)
-  - [ ] The chosen mode (light or dark) persists when navigating from home page to board pages and vice versa.
-  - [ ] When the user first visits the site the theme defaults to light mode.
+  - [x] The chosen mode (light or dark) persists when navigating from home page to board pages and vice versa.
+  - [x] When the user first visits the site the theme defaults to light mode.
   - [ ] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: To ease the grading process, please use the [color contrast checker](https://webaim.org/resources/contrastchecker/) to demonstrate to the grading team that text and background colors on your website have appropriate contrast in both light and dark mode. The Contrast Ratio should be above 4.5:1 and should have a green box surrounding it.
 - [ ] **Pinned Cards**
   - [ ] Users can pin a card to the top of the board.
