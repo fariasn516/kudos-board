@@ -5,6 +5,7 @@ import App from './App.jsx'
 import BoardPage from './pages/BoardPage.jsx'
 import NotFound from './pages/NotFound.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { ThemeProvider } from './contexts/ThemeContext.jsx'
 
 const routes = createBrowserRouter([
   {
@@ -20,6 +21,8 @@ const routes = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={routes} />
+    <ThemeProvider>
+      <RouterProvider router={routes} />
+    </ThemeProvider>
   </StrictMode>,
 )
