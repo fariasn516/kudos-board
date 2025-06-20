@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import '../App.css';
 
-function SearchBar({ searchTitle, setSearchTitle, onSearch }) {
+function SearchBar({ searchTitle, setSearchTitle, onSearch, onClear }) {
   return (
     <section className="search-form">
       <form onSubmit={onSearch}>
@@ -15,10 +15,7 @@ function SearchBar({ searchTitle, setSearchTitle, onSearch }) {
         <button
           type="button"
           className="clear-button"
-          onClick={() => {
-            setSearchTitle("");
-            onSearch({ preventDefault: () => { } });
-          }}
+          onClick={onClear}
         >
           Clear
         </button>
@@ -26,6 +23,5 @@ function SearchBar({ searchTitle, setSearchTitle, onSearch }) {
     </section>
   );
 }
-
 
 export default SearchBar;
