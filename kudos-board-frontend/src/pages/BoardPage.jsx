@@ -1,86 +1,71 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Header from '../shared-components/Header';
 import Footer from '../shared-components/Footer';
-import { Link } from 'react-router-dom';
 import CardList from '../board-page-components/CardList';
 import AddCard from '../board-page-components/AddCard';
+import AddCardModal from '../board-page-components/AddCardModal';
 
 const BoardPage = () => {
-  const location = useLocation();
-  const boardData = location.state;
+  const { state: board } = useLocation();
   const [cards, setCards] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
-  const handleDeleteCard = async (cardId) => {
+  const fetchCards = () =>
+    fetch(`http://localhost:3000/api/boards/${board.id}/cards`)
+      .then((r) => r.json())
+      .then(setCards)
+      .catch((e) => console.error(e));
+
+  const handleUpvote = async (id) => {
+    setCards((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, upvotes: c.upvotes + 1 } : c))
+    );
+    const card = cards.find((c) => c.id === id);
+    if (!card) return;
     try {
-      const res = await fetch(`http://localhost:3000/api/cards/${cardId}`, {
-        method: "DELETE",
+      await fetch(`http://localhost:3000/api/cards/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ upvotes: card.upvotes + 1 }),
       });
-
-      if (!res.ok) throw new Error("Failed to delete");
-
-      setCards((prev) => prev.filter((c) => c.id !== cardId));
-    } catch (err) {
-      alert("Error: " + err.message);
+    } catch {
+      fetchCards();
     }
   };
 
-  const handleUpvote = async (cardId) => {
-    const prevCards = cards;
-    const newCards = cards.map((c) =>
-      c.id === cardId ? { ...c, upvotes: c.upvotes + 1 } : c
-    );
-    setCards(newCards);
-
-    const updatedCard = newCards.find((c) => c.id === cardId);
-
+  const handleDelete = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/cards/${cardId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ upvotes: updatedCard.upvotes }),
-      });
-
-      if (!res.ok) throw new Error();
-
-      const result = await res.json();
-      setCards((prev) => prev.map((c) => (c.id === cardId ? result : c)));
-    } catch {
-      setCards(prevCards);
-      alert("Failed to upvote");
+      await fetch(`http://localhost:3000/api/cards/${id}`, { method: 'DELETE' });
+      setCards((prev) => prev.filter((c) => c.id !== id));
+    } catch (e) {
+      alert('Failed to delete');
     }
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/boards/${boardData.id}/cards`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Cards:', data);
-        setCards(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching cards:', error);
-      });
-  }, [boardData.id]);
+    return () => {};
+  }, []);
 
   return (
     <div className="board-page">
       <Header />
       <main className="board-content">
-        <div className='back-container'>
-          <Link to="/">Back to Home</Link>
-        </div>
-        <div className="board-details">
-          <h1>Board: {boardData.title}</h1>
-          <p>Category: {boardData.category}</p>
-        </div>
-        <AddCard />
-        <CardList cards={cards} onUpvote={handleUpvote} onDelete={handleDeleteCard}/>
+        <Link to="/"> Back to Home</Link>
+
+        <h1>{board.title}</h1>
+        <p>Category: {board.category}</p>
+        <AddCard onClick={() => setShowModal(true)} />
+        {showModal && (
+          <AddCardModal
+            boardId={board.id}
+            onClose={() => setShowModal(false)}
+            onCardCreated={fetchCards}
+          />
+        )}
+        <CardList cards={cards}
+          onUpvote={handleUpvote}
+          onDelete={handleDelete} />
       </main>
       <Footer />
     </div>
