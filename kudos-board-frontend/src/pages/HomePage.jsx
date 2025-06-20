@@ -6,6 +6,7 @@ import BoardList from '../home-page-components/BoardList';
 import AddBoard from '../home-page-components/AddBoard';
 import Footer from '../shared-components/Footer';
 import AddBoardModal from '../home-page-components/AddBoardModal';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const HomePage = () => {
   const [boards, setBoards] = useState([]);
@@ -14,7 +15,7 @@ const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const fetchBoards = (title = "", category = "All") => {
-    let url = 'http://localhost:3000/api/boards';
+    let url = `${BACKEND_URL}/api/boards`;
     const params = [];
 
     if (title) params.push(`title=${encodeURIComponent(title)}`);
@@ -49,7 +50,7 @@ const HomePage = () => {
   const handleDeleteBoard = async (id) => {
     console.log("Deleting board id:", id);
     try {
-      const res = await fetch(`http://localhost:3000/api/boards/${id}`, {
+      const res = await fetch(`${BACKEND_URL}/api/boards/${id}`, {
         method: "DELETE",
       });
 

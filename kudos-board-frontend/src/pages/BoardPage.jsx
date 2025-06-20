@@ -6,6 +6,7 @@ import CardList from '../board-page-components/CardList';
 import AddCard from '../board-page-components/AddCard';
 import AddCardModal from '../board-page-components/AddCardModal';
 import CommentModal from '../board-page-components/CommentModal';
+const BACKEND_URL = import.meta.env.VITE_API_KEY;
 
 const BoardPage = () => {
   const { state: board } = useLocation();
@@ -24,7 +25,7 @@ const BoardPage = () => {
     });
 
   const fetchCards = () =>
-    fetch(`http://localhost:3000/api/boards/${board.id}/cards`)
+    fetch(`${BACKEND_URL}/api/boards/${board.id}/cards`)
       .then((r) => r.json())
       .then((data) => {
         const newCards = sortCards(Array.isArray(data) ? data : data.cards);
@@ -45,7 +46,7 @@ const BoardPage = () => {
     );
 
     try {
-      await fetch(`http://localhost:3000/api/cards/${id}`, {
+      await fetch(`${BACKEND_URL}/api/cards/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -78,7 +79,7 @@ const BoardPage = () => {
     );
 
     try {
-      await fetch(`http://localhost:3000/api/cards/${id}`, {
+      await fetch(`${BACKEND_URL}/api/cards/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -93,7 +94,7 @@ const BoardPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:3000/api/cards/${id}`, { method: 'DELETE' });
+      await fetch(`${BACKEND_URL}/api/cards/${id}`, { method: 'DELETE' });
       setCards((prev) => prev.filter((c) => c.id !== id));
     } catch {
       alert('Failed to delete');
