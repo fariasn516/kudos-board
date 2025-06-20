@@ -109,7 +109,7 @@ Deployed Application (**required**): [Kudos Board Deployed Site](https://kudos-b
   - [x] When light mode is enabled:
     - [x] Text and icons use a dark color
     - [x] The background uses a light color
-    - [ ] Color contrast has at least a 4.5:1 ratio using this [color contrast checker](https://webaim.org/resources/contrastchecker/)
+    - [x] Color contrast has at least a 4.5:1 ratio using this [color contrast checker](https://webaim.org/resources/contrastchecker/)
   - [x] The chosen mode (light or dark) persists when navigating from home page to board pages and vice versa.
   - [x] When the user first visits the site the theme defaults to light mode.
   - [x] **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS**: To ease the grading process, please use the [color contrast checker](https://webaim.org/resources/contrastchecker/) to demonstrate to the grading team that text and background colors on your website have appropriate contrast in both light and dark mode. The Contrast Ratio should be above 4.5:1 and should have a green box surrounding it.
@@ -135,7 +135,14 @@ Deployed Application (**required**): [Kudos Board Deployed Site](https://kudos-b
 
 ### Walkthrough Video
 
-`ADD_EMBEDDED_CODE_HERE`
+`<div>
+    <a href="https://www.loom.com/share/94fbee353a054a7bad6a71b14afe25e0">
+      <p>Exploring the Features of Coodleboard 🌟 - Watch Video</p>
+    </a>
+    <a href="https://www.loom.com/share/94fbee353a054a7bad6a71b14afe25e0">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/94fbee353a054a7bad6a71b14afe25e0-e75a39995d2fb8f3-full-play.gif">
+    </a>
+  </div>`
 
 ### Reflection
 

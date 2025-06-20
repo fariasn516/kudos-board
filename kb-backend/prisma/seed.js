@@ -18,8 +18,6 @@ async function main() {
     for (const card of cards) {
         await prisma.card.create({ data: card });
     }
-
-    console.log("Seeded boards with cards!");
 }
 
 main()

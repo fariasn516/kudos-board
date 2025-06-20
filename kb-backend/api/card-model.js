@@ -3,45 +3,33 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 module.exports = {
+    // Get all cards with optional filters, including comments
     async find(where) {
-        // GET http://localhost:5432/api/card?title=blah
-        // SELECT * FROM "Card" WHERE type='dog';
-        const cards = await prisma.card.findMany({ where, include: { comments: true } })
-        return cards
+        return await prisma.card.findMany({ where, include: { comments: true } })
     },
 
+    // Get a single card by ID
     async findById(id) {
-        // GET http://localhost:5432/api/card/1
-        // SELECT * FROM "Card" WHERE id = 1;
-        const card = await prisma.card.findUnique({ where: { id } })
-        return card
+        return await prisma.card.findUnique({ where: { id } })
     },
 
+    // Create a new card
     async create(changes) {
-        // POST http://localhost:5432/api/card/1 { fields here}
-        // INSERT INTO "Card"
-        const card = await prisma.card.create({ data: changes })
-        return card
+        return await prisma.card.create({ data: changes })
     },
 
+    // Update a card by ID
     async update(id, changes) {
-        // PUT http://localhost:5432/api/card/1 { adopted: true }
-        // UPDATE "Card" SET adopted = true WHERE id = 1;
-        const card = await prisma.card.update({ where: { id }, data: changes })
-        return card
+        return await prisma.card.update({ where: { id }, data: changes })
     },
 
+    // Delete a card by ID
     async delete(id) {
-        // DELETE http://localhost:5432/api/card/1
-        // DELETE FROM "Card" WHERE id = 1;
-        const card = await prisma.card.delete({ where: { id } })
-        return card
+        return await prisma.card.delete({ where: { id } })
     },
 
+    // Get all cards for a specific board, including comments
     async findByBoardId(boardId) {
-        // GET http://localhost:5432/api/card?boardId=1
-        // SELECT * FROM "Card" WHERE boardId = 1;
-        const cards = await prisma.card.findMany({ where: { boardId }, include: { comments: true } })
-        return cards
+        return await prisma.card.findMany({ where: { boardId }, include: { comments: true } })
     }
 }
