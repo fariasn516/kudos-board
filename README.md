@@ -135,14 +135,14 @@ Deployed Application (**required**): [Kudos Board Deployed Site](https://kudos-b
 
 ### Walkthrough Video
 
-`<div>
+  <div>
     <a href="https://www.loom.com/share/94fbee353a054a7bad6a71b14afe25e0">
       <p>Exploring the Features of Coodleboard 🌟 - Watch Video</p>
     </a>
     <a href="https://www.loom.com/share/94fbee353a054a7bad6a71b14afe25e0">
       <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/94fbee353a054a7bad6a71b14afe25e0-e75a39995d2fb8f3-full-play.gif">
     </a>
-  </div>`
+  </div>
 
 ### Reflection
 
