@@ -1,81 +1,135 @@
-import React, { useState } from 'react';
-import '../App.css';
+import React, { useState } from "react";
+import "../App.css";
 
 const AddCardModal = ({ boardId, onClose, onCardCreated }) => {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [author, setAuthor] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [author, setAuthor] = useState("");
 
-    const GIF_PLACEHOLDER =
-        "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif";
+  const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState([]);
+  const [selectedGif, setSelectedGif] = useState(null);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!title || !description) {
-            alert("Title and description are required!");
-            return;
-        }
+  const handleGifSearch = async (e) => {
+    e.preventDefault();
+    if (!searchTerm.trim()) return;
+    try {
+      const key = import.meta.env.VITE_API_KEY;
+      const url =
+        `https://api.giphy.com/v1/gifs/search?` +
+        `api_key=${key}&q=${encodeURIComponent(searchTerm)}` +
+        `&limit=6&rating=g`;
+      const res = await fetch(url);
+      const json = await res.json();
+      setResults(json.data || []);
+    } catch (err) {
+      console.error("GIPHY search failed:", err);
+    }
+  };
 
-        const newCard = { title, description,  gif: GIF_PLACEHOLDER, author: author || null };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!title || !description || !selectedGif) return;
 
-        try {
-            const res = await fetch(
-                `http://localhost:3000/api/boards/${boardId}/cards`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newCard),
-                }
-            );
-
-            if (!res.ok) throw new Error("Failed to create card");
-
-            await res.json();
-            onCardCreated();
-            onClose();
-        } catch (err) {
-            alert(err.message);
-        }
+    const newCard = {
+      title,
+      description,
+      gif: selectedGif,
+      author: author || null,
     };
 
-    return (
-        <div className="modal-overlay">
-            <div className="modal">
-                <button className="close-button" onClick={onClose}>×</button>
-                <h2>Create a New Card</h2>
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/boards/${boardId}/cards`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newCard),
+        }
+      );
+      if (!res.ok) throw new Error("Failed to create card");
 
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        Title:
-                        <input
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            required
-                        />
-                    </label>
+      await res.json();
+      onCardCreated();
+      onClose();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
 
-                    <label>
-                        Description:
-                        <input
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                            required
-                        />
-                    </label>
+  return (
+    <div className="modal-overlay">
+      <div className="modal">
+        <button className="close-button" onClick={onClose}>
+          ×
+        </button>
+        <h2>Create a New Card</h2>
 
-                    <label>
-                        Author:
-                        <input
-                            value={author}
-                            onChange={(e) => setAuthor(e.target.value)}
-                        />
-                    </label>
+        <form onSubmit={handleSubmit} className="card-form">
+          <label>
+            Title:
+            <input value={title} onChange={(e) => setTitle(e.target.value)} required />
+          </label>
 
-                    <button type="submit">Create Card</button>
-                </form>
+          <label>
+            Description:
+            <input
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+          </label>
+
+          <label>
+            Author:
+            <input value={author} onChange={(e) => setAuthor(e.target.value)} />
+          </label>
+
+          <label>
+            GIF search:
+            <input
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="e.g. celebration"
+            />
+          </label>
+          <button onClick={handleGifSearch} className="gif-search-button">
+            Search GIFs
+          </button>
+
+          {results.length > 0 && (
+            <div className="gif-grid">
+              {results.map((gif) => {
+                const url = gif.images.fixed_height_small.url;
+                return (
+                  <img
+                    key={gif.id}
+                    src={url}
+                    alt={gif.title}
+                    className={
+                      url === selectedGif ? "gif-thumb selected" : "gif-thumb"
+                    }
+                    onClick={() => setSelectedGif(url)}
+                  />
+                );
+              })}
             </div>
-        </div>
-    );
+          )}
+
+          {selectedGif && (
+            <>
+              <p>Selected GIF preview:</p>
+              <img src={selectedGif} alt="selected gif" className="gif-preview" />
+            </>
+          )}
+
+          <button type="submit" disabled={!selectedGif}>
+            Create Card
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default AddCardModal;
