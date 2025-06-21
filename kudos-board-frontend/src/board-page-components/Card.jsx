@@ -40,7 +40,7 @@ function Card({
 
         <button
           className="card-comment-button"
-          onClick={() => onCommentClick({ id, title, comments })}
+          onClick={() => onCommentClick({ id, title, description, author, gif, comments })}
         >
           View Comments
         </button>
